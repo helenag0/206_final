@@ -54,21 +54,12 @@ def getTopSongsApple():
         popularity = i + 1
         return_list.append((song_list[i], album_list[i], popularity, time_list[i]))
 
-    # print("Apple Top Songs Info List:")
-    # print(return_list)
-    # print('\n')
+    print("Apple Top Songs Info List:")
+    print(return_list)
+    print('\n')
     return return_list
 
-# def appleDBSetUp(db_name, data):
-#     path = os.path.dirname(os.path.abspath(__file__))
-#     conn = sqlite3.connect(path+'/'+db_name)
-#     cur = conn.cursor()
-#     cur.execute("DROP TABLE IF EXISTS Apple_info")
-#     cur.execute("CREATE TABLE Apple_info(name TEXT, album TEXT, popularity INTEGER, time INTEGER)")
-#     lst = data
-#     for item in lst:
-#         cur.execute("INSERT OR IGNORE INTO Apple_info (name, album, popularity, time) VALUES (?,?,?,?)", (item[0],item[1],item[2],item[3]))
-#     conn.commit()
+
 
 #getting artist data, song names, and each of their popularity levels
 
@@ -161,9 +152,9 @@ def ArtistData(artistlink):
         for song in song_name_lst:
             if list[0] == song[1]:
                 list[0] = song[0]
-    # print("ArtistData Info List:")
-    # print(info_lst)
-    # print('\n')
+    print("ArtistData Info List:")
+    print(info_lst)
+    print('\n')
     return info_lst
 
 
@@ -198,9 +189,9 @@ def SongPopData(artist_link):
     
         track_lst.append((albumname2, trackname,trackpop,song_id2))  
     
-    # print("Spotify Popularity Info List:")
-    # print(song_pop)
-    # print('\n')
+    print("Spotify Popularity Info List:")
+    print(song_pop)
+    print('\n')
     return song_pop
 
 
@@ -384,17 +375,17 @@ def main():
     lst = getTopSongsApple()
     ArtistData(artist_link)
     SongPopData(artist_link)
-    SongPopdbSetUp('spotipy_apple_final.db')
-    appleDBSetUp('spotipy_apple_final.db', lst)
-    spotipyDBSetUp('spotipy_apple_final.db')
-    joinDBs('spotipy_apple_final.db')
-    calc_lst = joinDBs('spotipy_apple_final.db')
+    SongPopdbSetUp('spotipy_apple_finaldb.db')
+    appleDBSetUp('spotipy_apple_finaldb.db', lst)
+    spotipyDBSetUp('spotipy_apple_finaldb.db')
+    joinDBs('spotipy_apple_finaldb.db')
+    calc_lst = joinDBs('spotipy_apple_finaldb.db')
     vis_tup_1 = calculations_alb_dance(calc_lst, 'final_calculations.txt')
     visualization_alb_dnc(vis_tup_1)
     vis_tup_2 = calculations_pop_dnc_corr(calc_lst)
     visualization_pop_dnc_corr(vis_tup_2)
     visualization_dance_pop(artist_link)
-    album_pop('spotipy_apple_final.db', calc_lst)
+    album_pop('spotipy_apple_finaldb.db', calc_lst)
 
 if __name__ == "__main__":
     main()
